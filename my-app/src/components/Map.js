@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  InfoWindow,
   withScriptjs,
   withGoogleMap,
   GoogleMap,
@@ -142,13 +141,11 @@ class gMap extends React.Component {
           position={{ lat: this.state.markerPosition.lat, lng: this.state.markerPosition.lng }}
           draggable={true}
           onDragEnd={this.onMarkerDragEnd}
-        >
-          <InfoWindow>
-            <div>
-              text
-          </div>
-          </InfoWindow>
-        </Marker>
+          icon={{
+            url: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/microsoft/209/man-standing_1f9cd-200d-2642-fe0f.png',
+            scaledSize: new window.google.maps.Size(30, 30)
+          }}
+        />
       </GoogleMap>
     ));
 
