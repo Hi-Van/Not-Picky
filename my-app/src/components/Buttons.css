@@ -1,0 +1,43 @@
+.content {
+    overflow-x: hidden;
+}
+
+.title {
+    padding-top: 1em;
+    text-align: center;
+    word-wrap: normal;
+    font-size: 50px;
+    font-weight: bolder;
+    color: #707070;
+}
+
+.subtitle {
+    padding-top: 1rem;
+    margin-bottom: 2em;
+    text-align: center;
+    word-wrap: normal;
+    font-size: xx-large;
+    font-weight: bolder;
+    color: #707070;
+}
+
+
+.question {
+    padding-left: .15em;
+    padding-right: .15em;
+    margin-top: 1em;
+    text-align: center;
+    word-wrap: normal;
+    font-size: xx-large;
+    font-weight: lighter;
+    color: #707070;
+}
+
+.question-take {
+    margin-top: 4em;
+    text-align: center;
+    word-wrap: normal;
+    font-size: xx-large;
+    font-weight: lighter;
+    color: #707070;
+}

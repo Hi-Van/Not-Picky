@@ -154,12 +154,14 @@ class gMap extends React.Component {
 
 
     return (
-      <MapWithAMarker
-        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZlCCYOnQAZqv6EvGt7Ghtvx4NuXpV0WY&v=3.exp&libraries=geometry,drawing,places"
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `400px` }} />}
-        mapElement={<div style={{ height: `100%` }} />}
-      />
+      <div style={{ padding: '1rem', margin: '1rem auto 3rem', maxWidth: 1000 , }}>
+        <MapWithAMarker
+          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZlCCYOnQAZqv6EvGt7Ghtvx4NuXpV0WY&v=3.exp&libraries=geometry,drawing,places"
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `400px` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+        />
+      </div>
     );
   }
 }

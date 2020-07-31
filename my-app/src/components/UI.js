@@ -1,11 +1,12 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Route } from "react-router-dom";
 import gMap from "./Map";
 import Buttons from "./Buttons";
+import './UI.css'
 
 function userInterface() {
     return (
-        <div>
+        <div className="ui-wrapper">
             <Route path="/" component={Buttons} />
             <Route path="/" component={gMap} />
         </div>
