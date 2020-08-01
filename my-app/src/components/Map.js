@@ -12,10 +12,6 @@ Geocode.setApiKey("AIzaSyAZlCCYOnQAZqv6EvGt7Ghtvx4NuXpV0WY");
 class gMap extends React.Component {
 
   state = {
-    address: "",
-    city: "",
-    area: "",
-    state: "",
     height: 400,
     mapPosition: {
       lat: 0,
@@ -24,42 +20,6 @@ class gMap extends React.Component {
     markerPosition: {
       lat: 0,
       lng: 0,
-    }
-  }
-
-  getCity = (addressArr) => {
-    let city = '';
-    for (let i = 0; i < addressArr.length; i++) {
-      if (addressArr[i].types[0] && 'administrative_area_level_2' === addressArr[i].types[0]) {
-        city = addressArr[i].long_name;
-        return city;
-      }
-    }
-  }
-
-  getArea = (addressArr) => {
-    let area = '';
-    for (let i = 0; i < addressArr.length; i++) {
-      if (addressArr[i].types[0]) {
-        for (let j = 0; j < addressArr.length; j++) {
-          if (addressArr[i].types[j] === 'sublocality_level_1' || 'locality' === addressArr[i].types[j]) {
-            area = addressArr[i].long_name;
-            return area;
-          }
-        }
-      }
-    }
-  }
-
-  getState = (addressArr) => {
-    let state = '';
-    for (let i = 0; i < addressArr.length; i++) {
-      for (let i = 0; i < addressArr.length; i++) {
-        if (addressArr[i].types[0] && 'administrative_area_level_1' === addressArr[i].types[0]) {
-          state = addressArr[i].long_name;
-          return state;
-        }
-      }
     }
   }
 
@@ -74,24 +34,6 @@ class gMap extends React.Component {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         }
-      }, () => {
-        Geocode.fromLatLng(position.coords.latitude, position.coords.longitude)
-          .then(response => {
-
-            const address = response.results[0].formatted_address,
-              addressArr = response.results[0].address_components,
-              city = this.getCity(addressArr),
-              area = this.getArea(addressArr),
-              state = this.getState(addressArr);
-            console.log('response', response);
-            console.log('city', city, area, state);
-            this.setState({
-              address: (address) ? address : '',
-              area: (area) ? area : '',
-              city: (city) ? city : '',
-              state: (state) ? state : ''
-            })
-          })
       })
     })
   }
@@ -102,19 +44,9 @@ class gMap extends React.Component {
 
     Geocode.fromLatLng(newLat, newLng)
       .then(response => {
-
-        const address = response.results[0].formatted_address,
-          addressArr = response.results[0].address_components,
-          city = this.getCity(addressArr),
-          area = this.getArea(addressArr),
-          state = this.getState(addressArr);
         console.log('response', response);
-        console.log('city', city, area, state);
+        console.log( newLat, newLng);
         this.setState({
-          address: (address) ? address : '',
-          area: (area) ? area : '',
-          city: (city) ? city : '',
-          state: (state) ? state : '',
           markerPosition: {
             lat: newLat,
             lng: newLng
