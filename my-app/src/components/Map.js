@@ -16,7 +16,6 @@ class gMap extends React.Component {
     city: "",
     area: "",
     state: "",
-    zoom: 15,
     height: 400,
     mapPosition: {
       lat: 0,
@@ -134,7 +133,7 @@ class gMap extends React.Component {
 
     const MapWithAMarker = withScriptjs(withGoogleMap(props =>
       <GoogleMap
-        defaultZoom={15}
+        defaultZoom={17}
         defaultCenter={{ lat: this.state.mapPosition.lat, lng: this.state.mapPosition.lng }}
       >
         <Marker
@@ -151,11 +150,11 @@ class gMap extends React.Component {
 
 
     return (
-      <div style={{ padding: '1rem', margin: '1rem auto 3rem', maxWidth: 1000 , }}>
+      <div style={{ padding: '1rem', margin: '1rem auto 3rem', maxWidth: 1200 , }}>
         <MapWithAMarker
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZlCCYOnQAZqv6EvGt7Ghtvx4NuXpV0WY&v=3.exp&libraries=geometry,drawing,places"
           loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `400px` }} />}
+          containerElement={<div style={{ height: `600px` }} />}
           mapElement={<div style={{ height: `100%` }} />}
         />
       </div>

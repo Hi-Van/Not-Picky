@@ -31,6 +31,7 @@
     font-size: xx-large;
     font-weight: lighter;
     color: #707070;
+    cursor: context-menu;
 }
 
 .question-take {
@@ -40,4 +41,15 @@
     font-size: xx-large;
     font-weight: lighter;
     color: #707070;
+    cursor: context-menu;
+}
+
+.searchInput {
+    font-size: large;
+    word-wrap: normal;
+    background-color: #e0e0e0;
+    padding-left: 1.2em;
+    padding-right: 1.2em;
+    border-radius: 4px;
+    cursor: context-menu;
 }
