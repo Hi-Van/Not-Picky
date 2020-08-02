@@ -1,26 +1,42 @@
 import React from 'react';
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker,
-} from "react-google-maps";
 import Geocode from "react-geocode";
+import GoogleMapReact from 'google-map-react';
+import Buttons from "./Buttons";
 
 Geocode.setApiKey("AIzaSyAZlCCYOnQAZqv6EvGt7Ghtvx4NuXpV0WY");
 
-class gMap extends React.Component {
+const Marker = () => (
+  <div style={{
+    textAlign: 'center',
+    fontSize: 'xx-large',
+    alignItems: 'center',
+    justifyContent: 'center',
+    display: 'inline-flex',
+    transform: 'translate(-50%, -50%)'
+  }}>
+    <span role="img" aria-label="current position">🧍‍♂️</span></div>
+);
 
-  state = {
-    height: 400,
-    mapPosition: {
-      lat: 0,
-      lng: 0,
-    },
-    markerPosition: {
-      lat: 0,
-      lng: 0,
-    }
+class MapDisplay extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      constraints: [{ name: '', time: 0 }],
+      searchResults: [],
+      mapsLoaded: false,
+      markers: [],
+      map: {},
+      mapsApi: {},
+
+      placesService: {},
+      geoCoderService: {},
+      directionService: {},
+      mapPosition: {
+        lat: 0,
+        lng: 0,
+      }
+    };
   }
 
   componentDidMount() {
@@ -29,69 +45,65 @@ class gMap extends React.Component {
         mapPosition: {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
-        },
-        markerPosition: {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
         }
       })
     })
   }
 
-  onMarkerDragEnd = (event) => {
-    let newLat = event.latLng.lat();
-    let newLng = event.latLng.lng();
+  apiHasLoaded = ((map, maps) => {
+    this.setState({
+      mapsLoaded: true,
+      map,
+      maps,
+      placesService: new maps.places.PlacesService(map),
+      geoCoderService: new maps.Geocoder(),
+      directionService: new maps.DirectionsService(),
+    });
+  });
 
-    Geocode.fromLatLng(newLat, newLng)
-      .then(response => {
-        console.log('response', response);
-        console.log( newLat, newLng);
-        this.setState({
-          markerPosition: {
-            lat: newLat,
-            lng: newLng
-          },
-          mapPosition: {
-            lat: newLat,
-            lng: newLng
-          }
-        })
-      })
+  handleSearch = (() => {
+    const { mapsApi, placesService } = this.state;
+    const filteredResults = [];
 
-    console.log('newlat', newLat, 'newLng', newLng);
-  }
+    const placesRequest = {
+      location: new mapsApi.LatLng(this.state.mapPosition.lat, this.state.mapPosition.lng),
+      type: ['restaurant', 'cafe', 'bakery', 'meal_takeaway', 'meal_delivery'],
+      query: searchInput,
+      rankBy: mapsApi.places.RankBy.DISTANCE,
+    };
+
+    placesService.textSearch(placesRequest, ((response) => {
+      for (let i = 0; i < response.length; i++) {
+        const result = response[i];
+        const { name } = result;
+        const address = result.formatted_address;
+        filteredResults.push(name);
+      }
+    }))
+
+    this.setState({ searchResults: filteredResults })
+  });
 
   render() {
-
-    const MapWithAMarker = withScriptjs(withGoogleMap(props =>
-      <GoogleMap
-        defaultZoom={17}
-        defaultCenter={{ lat: this.state.mapPosition.lat, lng: this.state.mapPosition.lng }}
-      >
-        <Marker
-          position={{ lat: this.state.markerPosition.lat, lng: this.state.markerPosition.lng }}
-          draggable={true}
-          onDragEnd={this.onMarkerDragEnd}
-          icon={{
-            url: 'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/microsoft/209/man-standing_1f9cd-200d-2642-fe0f.png',
-            scaledSize: new window.google.maps.Size(30, 30)
-          }}
-        />
-      </GoogleMap>
-    ));
-
-
     return (
-      <div style={{ padding: '1rem', margin: '1rem auto 3rem', maxWidth: 1200 , }}>
-        <MapWithAMarker
-          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZlCCYOnQAZqv6EvGt7Ghtvx4NuXpV0WY&v=3.exp&libraries=geometry,drawing,places"
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `600px` }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-        />
+      <div className="container" style={{ maxWidth: '1200px', height: '600px', margin: 'auto', padding: '2rem' }}>
+        <GoogleMapReact
+          bootstrapURLKeys={{
+            key: 'AIzaSyAZlCCYOnQAZqv6EvGt7Ghtvx4NuXpV0WY',
+            libraries: ['places']
+          }}
+          defaultZoom={16}
+          defaultCenter={{ lat: this.state.mapPosition.lat, lng: this.state.mapPosition.lng }}
+          yesIWantToUseGoogleMapApiInternals={true}
+          onGoogleApiLoaded={({ map, maps }) => this.apiHasLoaded(map, maps)}
+        >
+          <Marker
+            lat={this.state.mapPosition.lat}
+            lng={this.state.mapPosition.lng} />
+        </GoogleMapReact>
       </div>
     );
   }
 }
 
-export default gMap;
+export default MapDisplay;
