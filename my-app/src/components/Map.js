@@ -68,7 +68,7 @@ class MapDisplay extends React.Component {
     const placesRequest = {
       location: new mapsApi.LatLng(this.state.mapPosition.lat, this.state.mapPosition.lng),
       type: ['restaurant', 'cafe', 'bakery', 'meal_takeaway', 'meal_delivery'],
-      query: searchInput,
+      query: this.props.searchText,
       rankBy: mapsApi.places.RankBy.DISTANCE,
     };
 
@@ -86,7 +86,7 @@ class MapDisplay extends React.Component {
 
   render() {
     return (
-      <div className="container" style={{ maxWidth: '1200px', height: '600px', margin: 'auto', padding: '2rem' }}>
+      <div className="container" style={{ maxWidth: '95%', height: '750px', margin: 'auto', padding: '2rem' }}>
         <GoogleMapReact
           bootstrapURLKeys={{
             key: 'AIzaSyAZlCCYOnQAZqv6EvGt7Ghtvx4NuXpV0WY',

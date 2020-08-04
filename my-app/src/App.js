@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import userInterface from "./components/UI";
+import Buttons from "./components/Buttons";
 import './App.css';
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <div className="wrapper">
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={userInterface} />
+          <Route exact path="/" component={Buttons} />
         </Switch>
       </BrowserRouter>
     </div>

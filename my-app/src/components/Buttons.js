@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button, Box } from '@material-ui/core';
+import { Route } from "react-router-dom";
+import MapDisplay from "./Map";
 import './Buttons.css';
 
 class Buttons extends React.Component {
@@ -157,6 +159,8 @@ class Buttons extends React.Component {
                     <div className="searchInput"><p>' {this.state.genre} ' + ' {this.state.takeOut} ' + restaurants near me</p></div>
                     <Button onClick={goButton} variant="contained" size="large" style={{marginLeft: '16px', color: '#707070'}} disableElevation>Go!</Button>
                 </Box>
+
+                <MapDisplay searchText={this.state.searchInput}  />
             </div>
         );
     }
