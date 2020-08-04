@@ -1,7 +1,6 @@
 import React from 'react';
 import Geocode from "react-geocode";
 import GoogleMapReact from 'google-map-react';
-import Buttons from "./Buttons";
 
 Geocode.setApiKey("AIzaSyAZlCCYOnQAZqv6EvGt7Ghtvx4NuXpV0WY");
 
@@ -17,6 +16,14 @@ const Marker = () => (
     <span role="img" aria-label="current position">🧍‍♂️</span></div>
 );
 
+const MapMarker = (({ name, key }) => {
+  return (
+    <div key={key}>
+      <span>{name} 🍽</span>
+    </div>
+  );
+});
+
 class MapDisplay extends React.Component {
 
   constructor(props) {
@@ -28,7 +35,6 @@ class MapDisplay extends React.Component {
       markers: [],
       map: {},
       mapsApi: {},
-
       placesService: {},
       geoCoderService: {},
       directionService: {},
@@ -50,20 +56,26 @@ class MapDisplay extends React.Component {
     })
   }
 
-  apiHasLoaded = ((map, maps) => {
+  apiHasLoaded = ((map, mapsApi) => {
     this.setState({
       mapsLoaded: true,
       map,
-      maps,
-      placesService: new maps.places.PlacesService(map),
-      geoCoderService: new maps.Geocoder(),
-      directionService: new maps.DirectionsService(),
+      mapsApi,
+      placesService: new mapsApi.places.PlacesService(map),
+      geoCoderService: new mapsApi.Geocoder(),
+      directionService: new mapsApi.DirectionsService(),
     });
   });
 
   handleSearch = (() => {
-    const { mapsApi, placesService } = this.state;
+    const { markers, placesService, mapsApi } = this.state;
+    if (markers.length === 0) {
+      console.error('Encountered ERROR: please check within Map component');
+      return;
+    };
+
     const filteredResults = [];
+    const marker = markers[0];
 
     const placesRequest = {
       location: new mapsApi.LatLng(this.state.mapPosition.lat, this.state.mapPosition.lng),
@@ -75,18 +87,21 @@ class MapDisplay extends React.Component {
     placesService.textSearch(placesRequest, ((response) => {
       for (let i = 0; i < response.length; i++) {
         const result = response[i];
-        const { name } = result;
+        const { rating, name } = result;
         const address = result.formatted_address;
         filteredResults.push(name);
       }
-    }))
+    }));
 
-    this.setState({ searchResults: filteredResults })
+    this.setState({ searchResults: filteredResults });
   });
 
   render() {
+
+    const { markers, searchResults } = this.state;
+
     return (
-      <div className="container" style={{ maxWidth: '95%', height: '750px', margin: 'auto', padding: '2rem' }}>
+      <div className="container" style={{ maxWidth: '1200px', height: '600px', margin: 'auto', padding: '2rem' }}>
         <GoogleMapReact
           bootstrapURLKeys={{
             key: 'AIzaSyAZlCCYOnQAZqv6EvGt7Ghtvx4NuXpV0WY',
@@ -100,6 +115,12 @@ class MapDisplay extends React.Component {
           <Marker
             lat={this.state.mapPosition.lat}
             lng={this.state.mapPosition.lng} />
+          {markers.map((marker, key) => {
+            const { name, lat, lng } = marker;
+            return (
+              <MapMarker key={key} name={name} lat={lat} lng={lng} />
+            );
+          })}
         </GoogleMapReact>
       </div>
     );

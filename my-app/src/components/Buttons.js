@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Box } from '@material-ui/core';
-import { Route } from "react-router-dom";
 import MapDisplay from "./Map";
 import './Buttons.css';
 
