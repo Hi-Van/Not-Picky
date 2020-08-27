@@ -106,34 +106,23 @@ class Buttons extends React.Component {
 
 <img src="./input-box.PNG" width="600"/>
 
-This component is a from that accepts the users input text to generate a word cloud. It uses react hooks in order to update the query and material UI button for handling submissions:
+This component is a from that accepts the users input and location to produce a map with markers of preferable restaurants in their immediate area. It accepts a ```searchText``` prop from a parent component in order to process a text search request. It uses the [Google Geocode and Google Map React dependencies](#dependencies) in order to generate a map and return nearby restuarants. The map was written according to the [Google Map React examples] with a custom function to change the map position to the user's coordinates:
 
 ```
-import { Button, Box } from '@material-ui/core';
-import { useState } from 'react';
+import Geocode from "react-geocode";
 
-function App() {
-    const [query, setQuery] = useState('');
-    const handleSubmit = (evt) => {
-        evt.preventDefault();
-        setQuery(document.getElementById('inputText').value);
-    }
-    
-    //word cloud code here
-    
-    series.text = query;
-    
-    return (
-        <div className="App">
-            <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="center" style={{ marginTop: '10rem' }}>
-                <form className="search" onSubmit={handleSubmit}> <input type="text" placeholder="Copy Paste Text.." id="inputText" className="input" /> </form>
-                <Button onClick={handleSubmit} variant="contained" size="large" style={{ margin: '20px' }} color='primary' disableElevation>Go!</Button>
-            </Box>
-        </div>
-    );
-}
+Geocode.setApiKey("Key Here");
 
-export default App;
+componentDidMount() {
+    navigator.geolocation.getCurrentPosition(position => {
+      this.setState({
+        mapPosition: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        }
+      })
+    })
+  }
 ```
 
 # Dependencies
