@@ -108,7 +108,7 @@ class Buttons extends React.Component {
 
 <img src="./take-out-button.PNG" width="600"/>
 
-This component component uses ```variant="secondary"```, ```Button```, and ```Box``` from the [Material UI dependencies](#dependencies). The dependencies can be imported as ```import { Button, Box } from '@material-ui/core';```. It uses an ```onClick``` function in order to update the current state of the ```takeOut``` state, which is sent to the [Go!](#go-button) button. An example of the genre buttons and container can be found below:
+This component component uses ```Button``` and ```Box``` from the [Material UI dependencies](#dependencies). The dependencies can be imported as ```import { Button, Box } from '@material-ui/core';```. This button displays the current ```genre``` and ```takeOut``` states, which is updated by the [genre](#genre-button) and [take out](#take-out-button) buttons. It uses an ```onClick``` function in order to update the current state of the ```searchInput``` state, which is sent to the [Map](#map) component. An example of the go button can be found below:
 
 ```
 class Buttons extends React.Component {
