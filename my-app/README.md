@@ -58,6 +58,7 @@ class Buttons extends React.Component {
                 genre: 'put option here'
             })
         }
+        
         return (
           <div>
             <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="center">
@@ -92,6 +93,7 @@ class Buttons extends React.Component {
                 takeOut: 'put option here'
             })
         }
+        
         return (
           <div>
             <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="center">
@@ -121,17 +123,20 @@ class Buttons extends React.Component {
         };
     }
     render() {
-        const option = () => {
+            const goButton = () => {
             this.setState({
-                takeOut: 'put option here'
+                searchInput: this.state.genre + ' ' + this.state.takeOut + ' restaurants'
             })
         }
+        
         return (
           <div>
-            <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="center">
-              <Button onClick={coffee} variant="contained" size="large" color="secondary" disableElevation style={{ margin: '40px' }}>Example</Button>
-              // more buttons here
-            </Box>
+            <Box display="flex" flexDirection="row" flexWrap="nowrap" justifyContent="center">
+                    <div className="searchInput"><p>' {this.state.genre} ' + ' {this.state.takeOut} ' + restaurants near me</p></div>
+                    <Button onClick={goButton} variant="contained" size="large" style={{marginLeft: '16px', color: '#707070'}} disableElevation>Go!</Button>
+                </Box>
+                
+                <MapDisplay searchText={this.state.searchInput}  />
           </div>
         );
       }
@@ -159,6 +164,22 @@ componentDidMount() {
       })
     })
   }
+```
+
+This Map component is wrapped in a class component in this specific application, which can be imported and used as:
+
+```
+import MapDisplay from "./Map";
+
+function App() {
+  return (
+    <div className="wrapper">
+      <MapDisplay searchText={this.state.searchInput}  />
+    </div>
+  );
+}
+
+export default App;
 ```
 
 # Dependencies
