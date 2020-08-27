@@ -133,5 +133,5 @@ Cloudy uses the following dependencies in order to function:
 
 * [ReactJS](https://reactjs.org/) - A JavaScript library for building user interfaces.
 * [Google Map React](https://github.com/google-map-react/google-map-react) - Google Maps API, Google Places API, and other maps services for React!
-* [React Geocode]()
+* [React Geocode](https://github.com/shukerullah/react-geocode) - Google Geocode API, this apparently has nothing to do with React!
 * [Material UI](https://material-ui.com/) - React UI component library designed according to material design standards.
