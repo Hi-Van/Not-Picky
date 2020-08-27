@@ -1,68 +1,143 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# [Cloudy](https://cloudy-word-cloud.herokuapp.com/)
 
-## Available Scripts
 
-In the project directory, you can run:
+Table of Contents
+=================
 
-### `npm start`
+   * [Description](#description)
+   * [Installation & Usage](#installation-and-usage)
+   * [Components](#components)
+      * [Header](#header)
+      * [Word Cloud](#about-me)
+      * [Input Box](#input-box)
+   * [Dependencies](#dependencies)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+# Description
 
-### `npm test`
+This web app is built using ReactJS, amCharts 4 Library, and material UI. The purpose of this web app is to create a word cloud from the text inputted from the user.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Installation and Usage
 
-### `npm run build`
+The portfolio application requires [Node.js](https://nodejs.org/) to run locally.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+First, clone the repository. Then cd into the app, install the dependencies, and start the server.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```
+$ cd word-cloud
+$ npm install
+$ npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Components:
 
-### `npm run eject`
+### Header
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<img src="./header.PNG" width="600"/>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This component is the header at the top of the application. The header simply displays the application name and link to a twitter profile. It was written using a few lines of code and appears under the class name ```title```:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+  <div className="title">
+  
+    <span role="img" aria-label="cloud" 
+      style={ {
+        fontSize: '4rem' , 
+        textAlign: 'center', 
+        margin: '.8rem' , 
+        color: 'white'} }
+     >☁</span> 
+     
+    <h1>CLOUDY 
+      <a href="https://twitter.com/Hi_Im_Van" target="_blank" rel="noopener noreferrer">By Van S.</a>
+    </h1> 
+    
+  </div>
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Word Cloud
 
-## Learn More
+<img src="./word-cloud.PNG" width="600"/>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This component page relies on the amCharts 4 dependencies, both can be imported as ```import * as am4core from "@amcharts/amcharts4/core";``` and ```
+import * as am4plugins_wordCloud from "@amcharts/amcharts4/plugins/wordCloud";``` It follows the [example](https://www.amcharts.com/demos/word-cloud/) of a word cloud from the amCharts 4 Library, with slight modifications in order to take input from the user:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+    am4core.useTheme(am4themes_animated);
+    var chart = am4core.create(
+        'chartdiv',
+        am4plugins_wordCloud.WordCloud
+    );
 
-### Code Splitting
+    var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+    series.text = query;
+```
 
-### Analyzing the Bundle Size
+The component can be rendered as:
+```
+import * as am4core from "@amcharts/amcharts4/core";
+import * as am4plugins_wordCloud from "@amcharts/amcharts4/plugins/wordCloud";
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+function App() {
+    am4core.useTheme(am4themes_animated);
+    var chart = am4core.create(
+        'chartdiv',
+        am4plugins_wordCloud.WordCloud
+    );
 
-### Making a Progressive Web App
+    var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+    series.text = "Text here";
+    
+  return (
+    <div className="App">
+      <div className="chartdiv" id="chartdiv" randomness='0.9' />
+    </div>
+  );
+}
 
-### Advanced Configuration
+export default App;
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+### Input Box
 
-### Deployment
+<img src="./input-box.PNG" width="600"/>
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+This component is a from that accepts the users input text to generate a word cloud. It uses react hooks in order to update the query and material UI button for handling submissions:
 
-### `npm run build` fails to minify
+```
+import { Button, Box } from '@material-ui/core';
+import { useState } from 'react';
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+function App() {
+    const [query, setQuery] = useState('');
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        setQuery(document.getElementById('inputText').value);
+    }
+    
+    //word cloud code here
+    
+    series.text = query;
+    
+    return (
+        <div className="App">
+            <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="center" style={{ marginTop: '10rem' }}>
+                <form className="search" onSubmit={handleSubmit}> <input type="text" placeholder="Copy Paste Text.." id="inputText" className="input" /> </form>
+                <Button onClick={handleSubmit} variant="contained" size="large" style={{ margin: '20px' }} color='primary' disableElevation>Go!</Button>
+            </Box>
+        </div>
+    );
+}
+
+export default App;
+```
+
+# Dependencies
+
+Cloudy uses the following dependencies in order to function:
+
+* [ReactJS](https://reactjs.org/) - A JavaScript library for building user interfaces.
+* [amCharts 4](https://www.amcharts.com/) - A Javascript graphs and charts.
+* [Material UI](https://material-ui.com/) - React UI component library designed according to material design standards.
