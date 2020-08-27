@@ -9,6 +9,7 @@ Table of Contents
    * [Components](#components)
       * [Genre Button](#genre-button)
       * [Take Out Button](#take-out-button)
+      * [Go Button](#go-button)
       * [Map](#map)
    * [Dependencies](#dependencies)
 
@@ -37,7 +38,7 @@ $ npm start
 
 <img src="./header.PNG" width="600"/>
 
-This component component uses ```variant="primary"```, ```Button```, and ```Box``` from the Material UI dependencies. The dependencies can be imported as ```import { Button, Box } from '@material-ui/core';```. An example of the genre buttons and container can be found below:
+This component component uses ```variant="primary"```, ```Button```, and ```Box``` from the ![Material UI dependencies](#dependencies). The dependencies can be imported as ```import { Button, Box } from '@material-ui/core';```. It uses an ```onClick``` function in order to update the current state of the ```genre``` state, which is sent to the [Go!](#go-button) button. An example of the genre buttons and container can be found below:
 
 ```
 class Buttons extends React.Component {
