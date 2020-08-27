@@ -16,7 +16,7 @@ Table of Contents
 
 # Description
 
-This web app is built using ReactJS, Material UI, Google Geocode API, Google Maps API, and Google Places API. This web app takes in the user's input and current location to search nearby restaurants that match the query request. In order to use the Map, the user must enable location for the application.
+This web app is built using ReactJS, Material UI, Google Geocode API, Google Maps API, and Google Places API. This web app takes in the user's input and current location to search nearby restaurants that match the query request. In order to use the Map component, the user must enable location for the application.
 
 *Request feature is still in progress but the map still loads to the user location
 
@@ -108,7 +108,7 @@ class Buttons extends React.Component {
 
 ### Go Button
 
-<img src="./take-out-button.PNG" width="600"/>
+<img src="./go-button.PNG" width="600"/>
 
 This component component uses ```Button``` and ```Box``` from the [Material UI dependencies](#dependencies). The dependencies can be imported as ```import { Button, Box } from '@material-ui/core';```. This button displays the current ```genre``` and ```takeOut``` states, which is updated by the [genre](#genre-button) and [take out](#take-out-button) buttons. It uses an ```onClick``` function in order to update the current state of the ```searchInput``` state, which is sent to the [Map](#map) component. An example of the go button can be found below:
 
