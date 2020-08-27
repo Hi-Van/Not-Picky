@@ -16,7 +16,9 @@ Table of Contents
 
 # Description
 
-This web app is built using ReactJS, Material UI, Google Geocode API, Google Maps API, and Google Places API. This web app takes in the user's input and current location to search nearby restaurants that match the query request.
+This web app is built using ReactJS, Material UI, Google Geocode API, Google Maps API, and Google Places API. This web app takes in the user's input and current location to search nearby restaurants that match the query request. In order to use the Map, the user must enable location for the application.
+
+*Request feature is still in progress but the map still loads to the user location
 
 # Installation and Usage
 
@@ -106,7 +108,7 @@ class Buttons extends React.Component {
 
 <img src="./input-box.PNG" width="600"/>
 
-This component is a from that accepts the users input and location to produce a map with markers of preferable restaurants in their immediate area. It accepts a ```searchText``` prop from a parent component in order to process a text search request. It uses the [Google Geocode and Google Map React dependencies](#dependencies) in order to generate a map and return nearby restuarants. The map was written according to the [Google Map React examples] with a custom function to change the map position to the user's coordinates:
+This component is a from that accepts the users input and location to produce a map with markers of preferable restaurants in their immediate area. It accepts a ```searchText``` prop from a parent component in order to process a text search request. It uses the [Google Geocode and Google Map React dependencies](#dependencies) in order to generate a map and return nearby restuarants. The map was written according to the [Google Map React examples](https://github.com/google-map-react/google-map-react) with a custom function to change the map position to the user's coordinates:
 
 ```
 import Geocode from "react-geocode";
@@ -130,5 +132,6 @@ componentDidMount() {
 Cloudy uses the following dependencies in order to function:
 
 * [ReactJS](https://reactjs.org/) - A JavaScript library for building user interfaces.
-* [amCharts 4](https://www.amcharts.com/) - A Javascript graphs and charts.
+* [Google Map React](https://github.com/google-map-react/google-map-react) - Google Maps API, Google Places API, and other maps services for React!
+* [React Geocode]()
 * [Material UI](https://material-ui.com/) - React UI component library designed according to material design standards.
