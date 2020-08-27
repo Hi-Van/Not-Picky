@@ -38,7 +38,7 @@ $ npm start
 
 ### Genre Button
 
-<img src="./header.PNG" width="600"/>
+<img src="./genre-button.PNG" width="600"/>
 
 This component component uses ```variant="primary"```, ```Button```, and ```Box``` from the [Material UI dependencies](#dependencies). The dependencies can be imported as ```import { Button, Box } from '@material-ui/core';```. It uses an ```onClick``` function in order to update the current state of the ```genre``` state, which is sent to the [Go!](#go-button) button. An example of the genre buttons and container can be found below:
 
@@ -72,7 +72,41 @@ class Buttons extends React.Component {
 
 ### Take Out Button
 
-<img src="./word-cloud.PNG" width="600"/>
+<img src="./take-out-button.PNG" width="600"/>
+
+This component component uses ```variant="secondary"```, ```Button```, and ```Box``` from the [Material UI dependencies](#dependencies). The dependencies can be imported as ```import { Button, Box } from '@material-ui/core';```. It uses an ```onClick``` function in order to update the current state of the ```takeOut``` state, which is sent to the [Go!](#go-button) button. An example of the genre buttons and container can be found below:
+
+```
+class Buttons extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            genre: '',
+            takeOut: '',
+            searchInput: ''
+        };
+    }
+    render() {
+        const option = () => {
+            this.setState({
+                takeOut: 'put option here'
+            })
+        }
+        return (
+          <div>
+            <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="center">
+              <Button onClick={coffee} variant="contained" size="large" color="secondary" disableElevation style={{ margin: '40px' }}>Example</Button>
+              // more buttons here
+            </Box>
+          </div>
+        );
+      }
+    }
+```
+
+### Go Button
+
+<img src="./take-out-button.PNG" width="600"/>
 
 This component component uses ```variant="secondary"```, ```Button```, and ```Box``` from the [Material UI dependencies](#dependencies). The dependencies can be imported as ```import { Button, Box } from '@material-ui/core';```. It uses an ```onClick``` function in order to update the current state of the ```takeOut``` state, which is sent to the [Go!](#go-button) button. An example of the genre buttons and container can be found below:
 
@@ -106,7 +140,7 @@ class Buttons extends React.Component {
 
 ### Map
 
-<img src="./input-box.PNG" width="600"/>
+<img src="./map.PNG" width="600"/>
 
 This component is a from that accepts the users input and location to produce a map with markers of preferable restaurants in their immediate area. It accepts a ```searchText``` prop from a parent component in order to process a text search request. It uses the [Google Geocode and Google Map React dependencies](#dependencies) in order to generate a map and return nearby restuarants. The map was written according to the [Google Map React examples](https://github.com/google-map-react/google-map-react) with a custom function to change the map position to the user's coordinates:
 
