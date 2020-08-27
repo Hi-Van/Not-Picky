@@ -7,9 +7,9 @@ Table of Contents
    * [Description](#description)
    * [Installation & Usage](#installation-and-usage)
    * [Components](#components)
-      * [Header](#header)
-      * [Word Cloud](#about-me)
-      * [Input Box](#input-box)
+      * [Genre Button](#genre-button)
+      * [Take Out Button](#take-out-button)
+      * [Map](#map)
    * [Dependencies](#dependencies)
 
 
@@ -33,7 +33,7 @@ $ npm start
 
 # Components:
 
-### Header
+### Genre Button
 
 <img src="./header.PNG" width="600"/>
 
@@ -57,7 +57,7 @@ This component is the header at the top of the application. The header simply di
   </div>
 ```
 
-### Word Cloud
+### Take Out Button
 
 <img src="./word-cloud.PNG" width="600"/>
 
@@ -102,7 +102,7 @@ function App() {
 export default App;
 ```
 
-### Input Box
+### Map
 
 <img src="./input-box.PNG" width="600"/>
 
