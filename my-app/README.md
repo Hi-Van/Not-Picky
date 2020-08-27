@@ -174,7 +174,7 @@ import MapDisplay from "./Map";
 function App() {
   return (
     <div className="wrapper">
-      <MapDisplay searchText={this.state.searchInput}  />
+      <MapDisplay searchText="Search input here"  />
     </div>
   );
 }
