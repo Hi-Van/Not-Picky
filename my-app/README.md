@@ -72,19 +72,34 @@ class Buttons extends React.Component {
 
 <img src="./word-cloud.PNG" width="600"/>
 
-This component page relies on the amCharts 4 dependencies, both can be imported as ```import * as am4core from "@amcharts/amcharts4/core";``` and ```
-import * as am4plugins_wordCloud from "@amcharts/amcharts4/plugins/wordCloud";``` It follows the [example](https://www.amcharts.com/demos/word-cloud/) of a word cloud from the amCharts 4 Library, with slight modifications in order to take input from the user:
+This component component uses ```variant="secondary"```, ```Button```, and ```Box``` from the [Material UI dependencies](#dependencies). The dependencies can be imported as ```import { Button, Box } from '@material-ui/core';```. It uses an ```onClick``` function in order to update the current state of the ```takeOut``` state, which is sent to the [Go!](#go-button) button. An example of the genre buttons and container can be found below:
 
 ```
-    am4core.useTheme(am4themes_animated);
-    var chart = am4core.create(
-        'chartdiv',
-        am4plugins_wordCloud.WordCloud
-    );
-
-    var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
-
-    series.text = query;
+class Buttons extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            genre: '',
+            takeOut: '',
+            searchInput: ''
+        };
+    }
+    render() {
+        const option = () => {
+            this.setState({
+                takeOut: 'put option here'
+            })
+        }
+        return (
+          <div>
+            <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="center">
+              <Button onClick={coffee} variant="contained" size="large" color="secondary" disableElevation style={{ margin: '40px' }}>Example</Button>
+              // more buttons here
+            </Box>
+          </div>
+        );
+      }
+    }
 ```
 
 ### Map
