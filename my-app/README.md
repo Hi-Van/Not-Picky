@@ -1,4 +1,4 @@
-# [Cloudy](https://cloudy-word-cloud.herokuapp.com/)
+# [!Picky // IN PROGRESS](https://not-picky.herokuapp.com/)
 
 
 Table of Contents
@@ -15,9 +15,11 @@ Table of Contents
 
 # Description
 
-This web app is built using ReactJS, amCharts 4 Library, and material UI. The purpose of this web app is to create a word cloud from the text inputted from the user.
+This web app is built using ReactJS, Material UI, Google Geocode API, Google Maps API, and Google Places API. This web app takes in the user's input and current location to search nearby restaurants that match the query request.
 
 # Installation and Usage
+
+To use !Picky, click the ```genre``` and ```take out``` buttons to indicate your preferred genre and optional take out. Then, scroll down to the ```Go!``` button and click to submit a request. 
 
 The portfolio application requires [Node.js](https://nodejs.org/) to run locally.
 
