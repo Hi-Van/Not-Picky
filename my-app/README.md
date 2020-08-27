@@ -37,24 +37,34 @@ $ npm start
 
 <img src="./header.PNG" width="600"/>
 
-This component is the header at the top of the application. The header simply displays the application name and link to a twitter profile. It was written using a few lines of code and appears under the class name ```title```:
+This component component uses ```variant="primary"```, ```Button```, and ```Box``` from the Material UI dependencies. The dependencies can be imported as ```import { Button, Box } from '@material-ui/core';```. An example of the genre buttons and container can be found below:
 
 ```
-  <div className="title">
-  
-    <span role="img" aria-label="cloud" 
-      style={ {
-        fontSize: '4rem' , 
-        textAlign: 'center', 
-        margin: '.8rem' , 
-        color: 'white'} }
-     >☁</span> 
-     
-    <h1>CLOUDY 
-      <a href="https://twitter.com/Hi_Im_Van" target="_blank" rel="noopener noreferrer">By Van S.</a>
-    </h1> 
-    
-  </div>
+class Buttons extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            genre: '',
+            takeOut: '',
+            searchInput: ''
+        };
+    }
+    render() {
+        const option = () => {
+            this.setState({
+                genre: 'put option here'
+            })
+        }
+        return (
+          <div>
+            <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="center">
+              <Button onClick={coffee} variant="contained" size="large" color="primary" disableElevation style={{ margin: '40px' }}>Example</Button>
+              // more buttons here
+            </Box>
+          </div>
+        );
+      }
+    }
 ```
 
 ### Take Out Button
@@ -74,32 +84,6 @@ import * as am4plugins_wordCloud from "@amcharts/amcharts4/plugins/wordCloud";``
     var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
 
     series.text = query;
-```
-
-The component can be rendered as:
-```
-import * as am4core from "@amcharts/amcharts4/core";
-import * as am4plugins_wordCloud from "@amcharts/amcharts4/plugins/wordCloud";
-
-function App() {
-    am4core.useTheme(am4themes_animated);
-    var chart = am4core.create(
-        'chartdiv',
-        am4plugins_wordCloud.WordCloud
-    );
-
-    var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
-
-    series.text = "Text here";
-    
-  return (
-    <div className="App">
-      <div className="chartdiv" id="chartdiv" randomness='0.9' />
-    </div>
-  );
-}
-
-export default App;
 ```
 
 ### Map
